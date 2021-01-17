@@ -63,6 +63,9 @@ export class BookSearchComponent implements OnInit {
   onSearchChange(searchValue: string): void {  
     if(searchValue === ""){
       this.books = [];
+    }else{
+      this.searchForm.value.term = searchValue;
+      this.searchBooks();
     }
   }
 }
