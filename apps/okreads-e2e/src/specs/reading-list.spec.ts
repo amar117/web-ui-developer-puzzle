@@ -17,4 +17,21 @@ describe('When: I use the reading list feature', () => {
       )
     );
   });
+
+  it('Then: Undo my reading list', async () => {
+    await browser.get('/');
+    await browser.wait(
+      ExpectedConditions.textToBePresentInElement($('tmo-root'), 'okreads')
+    );
+
+    const snackbarUndobutton = await $('.mat-simple-snackbar-action');
+    await snackbarUndobutton.click();
+
+    await browser.wait(
+      ExpectedConditions.textToBePresentInElement(
+        $('[data-testing="reading-list-container"]'),
+        'My Reading List'
+      )
+    );
+  });
 });
