@@ -16,6 +16,11 @@ export class ReadingListController {
     return await this.readingList.addBook(item);
   }
 
+  @Get('/reading-list/:id/finished')
+  async addToFinishedList(@Body() item: Book) {
+    return await this.readingList.markFinished(item);
+  }
+
   @Delete('/reading-list/:id')
   async removeFromReadingList(@Param() params) {
     return await this.readingList.removeBook(params.id);

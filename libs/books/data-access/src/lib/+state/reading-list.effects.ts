@@ -38,13 +38,27 @@ export class ReadingListEffects implements OnInitEffects {
     )
   );
 
+  markFinished$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ReadingListActions.markFinished),
+      concatMap(({ item }) =>
+        this.http.get('/api/reading-list/'+item.bookId+'/finished').pipe(
+          map(() => ReadingListActions.confirmedMarkeAsFinished({ item })),
+          catchError(() =>
+            of(ReadingListActions.failedMarkAsFinished({ item }))
+          )
+        )
+      )
+    )
+  );
+
   removeBook$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ReadingListActions.removeFromReadingList),
       concatMap(({ item }) =>
         this.http.delete(`/api/reading-list/${item.bookId}`).pipe(
           map(() =>
-            ReadingListActions.confirmedRemoveFromReadingList({ item })
+            ReadingListActions.confirmedMarkeAsFinished({ item })
           ),
           catchError(() =>
             of(ReadingListActions.failedRemoveFromReadingList({ item }))

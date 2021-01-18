@@ -52,7 +52,10 @@ const readingListReducer = createReducer(
   ),
   on(ReadingListActions.removeFromReadingList, (state, action) =>
     readingListAdapter.removeOne(action.item.bookId, state)
-  )
+  ),
+  on(ReadingListActions.markFinished, (state, action) =>
+  readingListAdapter.addOne({ finished: true, ...action.item }, state)
+),
 );
 
 export function reducer(state: State | undefined, action: Action) {
