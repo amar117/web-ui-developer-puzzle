@@ -33,7 +33,6 @@ describe('Books Reducer', () => {
     });
 
     it('failedAddToReadingList should undo book addition to the state', () => {
-<<<<<<< HEAD
       const newLocal = {
         book: createBook('B')
       };
@@ -41,14 +40,6 @@ describe('Books Reducer', () => {
 
       const result: State = reducer(state, action);
       
-=======
-      const action = ReadingListActions.failedAddToReadingList({
-        book: createBook('B')
-      });
-
-      const result: State = reducer(state, action);
-
->>>>>>> 353195a... initial commit
       expect(result.ids).toEqual(['A']);
     });
 
