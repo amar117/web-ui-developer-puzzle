@@ -59,10 +59,4 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(clearSearch());
     }
   }
-
-  onSearchChange(searchValue: string): void {  
-    if(searchValue === ""){
-      this.books = [];
-    }
-  }
 }
